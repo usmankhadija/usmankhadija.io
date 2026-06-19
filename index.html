@@ -24,7 +24,12 @@
             --cinematic-gold: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
         }
 
-        /* Hide scrollbar for a true video/cinematic feel when playing */
+        /* Smooth, Page-by-Page Snapping */
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory; /* Forces scroll to snap to sections */
+        }
+        
         html::-webkit-scrollbar { width: 8px; }
         html::-webkit-scrollbar-track { background: #050505; }
         html::-webkit-scrollbar-thumb { background: #bf953f; border-radius: 10px; }
@@ -36,7 +41,6 @@
             font-family: 'Poppins', sans-serif;
             margin: 0; 
             padding: 0;
-            min-height: 100vh;
             overflow-x: hidden;
         }
 
@@ -61,30 +65,42 @@
             100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
 
-        /* Full Screen Brochure Container */
         .brochure-container {
             width: 100%;
-            min-height: 100vh;
             background: #050505;
             position: relative;
             z-index: 10;
             display: flex;
             flex-direction: column;
-            padding-bottom: 4rem; /* Buffer at the very end */
         }
 
-        /* 3-Column Layout */
+        /* 3-Column Layout & Snapping Logic */
         .trifold-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
+            min-height: 100vh;
         }
+
+        /* Desktop specific snapping */
+        @media (min-width: 1025px) {
+            .trifold-row {
+                scroll-snap-align: start;
+                scroll-snap-stop: always;
+            }
+        }
+
+        /* Mobile specific layout & snapping */
         @media (max-width: 1024px) {
-            .trifold-row { grid-template-columns: 1fr; }
+            .trifold-row { 
+                grid-template-columns: 1fr; 
+                min-height: auto;
+            }
             .border-separator { border-bottom: 0; }
-            /* Make panels full screen height on mobile to give reading space */
             .panel { 
                 min-height: 100vh !important; 
                 padding: 6rem 2.5rem !important;
+                scroll-snap-align: start;
+                scroll-snap-stop: always;
             }
         }
 
@@ -92,7 +108,6 @@
         .font-serif { font-family: 'Playfair Display', serif; }
         .font-script { font-family: 'Great Vibes', cursive; }
         
-        /* Gold Foil Text Effect */
         .text-gold {
             background: var(--cinematic-gold);
             -webkit-background-clip: text;
@@ -104,13 +119,13 @@
             padding: 4rem 3.5rem;
             display: flex;
             flex-direction: column;
-            min-height: 80vh; /* Taller on desktop for a grander feel */
+            min-height: 100vh; /* Every panel takes full height for uniform sliding */
             position: relative;
             overflow: hidden;
             justify-content: center;
         }
 
-        /* Deep Royal Cinematic Theme */
+        /* Themes */
         .bg-theme-cinematic {
             background: radial-gradient(circle at top right, #0024cc, #000b4d);
             color: white;
@@ -124,7 +139,6 @@
             pointer-events: none;
         }
 
-        /* Elegant Paper Texture */
         .bg-texture-white {
             background-color: #fdfdfd;
             background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7z' fill='%23000000' fill-opacity='0.015' fill-rule='evenodd'/%3E%3C/svg%3E");
@@ -183,7 +197,6 @@
             100% { transform: scale(1.1) translate(-2%, -2%); }
         }
 
-        /* Glassmorphism Badge */
         .glass-badge {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -217,7 +230,6 @@
             transform: scale(1.1);
             box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
         }
-        /* Pulse animation when auto-playing */
         .music-fab.playing {
             animation: pulse-music 2s infinite;
         }
@@ -248,8 +260,7 @@
         <!-- ================= TOP ROW ================= -->
         <div class="trifold-row border-separator border-b-[8px] border-black relative z-10">
             
-            <!-- Panel 1: The Groom -->
-            <div class="panel bg-texture-white text-black border-r border-gray-200 text-center" data-aos="fade-right">
+            <div class="panel bg-texture-white text-black border-r border-gray-200 text-center" data-aos="zoom-in-up" data-aos-duration="1200">
                 <div class="hashtag text-gray-400">Meet The Groom</div>
                 
                 <div class="mb-6">
@@ -267,8 +278,7 @@
                 </div>
             </div>
 
-            <!-- Panel 2: Our Story (Cinematic Royal Blue) -->
-            <div class="panel bg-theme-cinematic shadow-[inset_0_0_30px_rgba(0,0,0,0.5)] z-20" data-aos="fade-up">
+            <div class="panel bg-theme-cinematic shadow-[inset_0_0_30px_rgba(0,0,0,0.5)] z-20" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
                 <div class="hashtag text-blue-200/50">Our Love Story</div>
                 
                 <div class="text-center mb-10">
@@ -278,9 +288,7 @@
 
                 <div class="flex-grow font-serif text-[15px] space-y-6 text-blue-50 text-center leading-relaxed">
                     <p class="italic text-lg text-gold">"And We created you in pairs."<br><span class="text-xs uppercase tracking-[0.2em] font-sans not-italic font-bold text-blue-200 mt-2 block">- Quran 78:8 -</span></p>
-                    
                     <p class="opacity-90">What started as a respectful introduction quickly blossomed into a profound understanding and a deep, rooted friendship designed by Allah (SWT).</p>
-                    
                     <p class="opacity-90">Through shared values and mutual respect, we realized we had found our home in each other. With our families' blessings, we decided to complete half of our deen.</p>
 
                     <div class="mt-8 pt-6 border-t border-blue-400/20">
@@ -289,11 +297,8 @@
                 </div>
             </div>
 
-            <!-- Panel 3: Cinematic Cover Page -->
-            <div class="panel p-0 bg-black flex flex-col justify-between" data-aos="fade-left">
-                <!-- Animated Background Image -->
+            <div class="panel p-0 bg-black flex flex-col justify-between" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="400">
                 <div class="ken-burns-bg"></div>
-                <!-- Cinematic Gradient Overlays -->
                 <div class="absolute inset-0 bg-gradient-to-b from-black/90 via-black/30 to-black/90 z-10"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-[#000b4d]/50 to-transparent z-10 mix-blend-multiply"></div>
                 
@@ -304,7 +309,6 @@
                 </div>
 
                 <div class="relative z-20 p-8 flex justify-center mb-8">
-                    <!-- Glassmorphism Badge -->
                     <div class="glass-badge px-8 py-6 rounded-xl shadow-2xl text-center w-full max-w-[280px] backdrop-blur-md border-t border-white/40">
                         <h2 class="font-serif text-4xl font-black leading-none mb-1 text-white drop-shadow-lg">Usman</h2>
                         <h2 class="font-script text-5xl text-gold -my-4 drop-shadow-md">&</h2>
@@ -321,8 +325,7 @@
         <!-- ================= BOTTOM ROW ================= -->
         <div class="trifold-row relative z-10">
             
-            <!-- Panel 4: The Bride -->
-            <div class="panel bg-texture-white text-black border-r border-gray-200 text-center" data-aos="fade-right">
+            <div class="panel bg-texture-white text-black border-r border-gray-200 text-center" data-aos="zoom-in-up" data-aos-duration="1200">
                 <div class="hashtag text-gray-400">Meet The Bride</div>
                 
                 <div class="mb-6">
@@ -342,8 +345,7 @@
                 </div>
             </div>
 
-            <!-- Panel 5: Celebration Details (Cinematic Royal Blue) -->
-            <div class="panel bg-theme-cinematic shadow-[inset_0_0_30px_rgba(0,0,0,0.5)] z-20" data-aos="fade-up">
+            <div class="panel bg-theme-cinematic shadow-[inset_0_0_30px_rgba(0,0,0,0.5)] z-20" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
                 <div class="hashtag text-blue-200/50">The Celebration</div>
                 
                 <div class="text-center mb-10 border-b border-blue-400/20 pb-8">
@@ -364,21 +366,17 @@
                         <h3 class="font-serif text-2xl font-bold uppercase tracking-widest mb-3 text-gold">The Reception</h3>
                         <p class="font-bold text-[13px] tracking-[0.2em] uppercase mb-2 text-white">Follows Immediately</p>
                         <p class="text-[15px] italic font-serif text-blue-100">Coming Soon!!!</p>
-                        
                     </div>
                 </div>
             </div>
 
-            <!-- Panel 6: RSVP & Thank You -->
-            <div class="panel bg-texture-white text-black text-center" data-aos="fade-left">
+            <div class="panel bg-texture-white text-black text-center" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="400">
                 <div class="hashtag text-gray-400">Be Our Guest</div>
                 
                 <div class="font-sans space-y-6 flex flex-col h-full justify-between">
-                    
                     <div>
                         <h2 class="font-serif text-3xl font-black uppercase tracking-widest mb-3 text-gray-900">Join Our Joy</h2>
                         <p class="text-[15px] italic text-gray-600 mb-8 font-serif">We can't wait to celebrate with you!</p>
-                        
                     </div>
 
                     <div class="border-t border-gray-300 pt-8 mt-4">
@@ -392,7 +390,6 @@
                         <h1 class="font-script text-3xl text-gold my-2 drop-shadow-sm">&</h1>
                         <h1 class="font-serif text-3xl font-black leading-none text-gray-900">Khadijah</h1>
                     </div>
-
                 </div>
             </div>
 
@@ -402,7 +399,7 @@
     <!-- Scripts for Animations & Cinematic Scroll -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Initialize Scroll Animations (Mirrored so they trigger repeatedly on loop)
+        // Initialize Scroll Animations
         AOS.init({
             once: false,
             mirror: true,
@@ -432,111 +429,62 @@
             particleContainer.appendChild(particle);
         }
 
-        // --- Polished Cinematic Auto-Play Logic --- //
+        // --- Page-by-Page Cinematic Auto-Play Logic --- //
         const bgMusic = document.getElementById('bgMusic');
         const musicIcon = document.getElementById('musicIcon');
         const musicToggle = document.getElementById('musicToggle');
         
         let isPlaying = false;
-        let autoScrollAnimation;
-        let scrollAccumulator = 0;
-        
-        // PAUSE CONFIGURATION
-        let isPausedForReading = false;
-        let pausedPanels = new Set();
-        const readingPauseDuration = 4000; // Pause 4 seconds per panel
-        const scrollSpeed = 0.30; 
+        let cinematicInterval;
+        const pageDuration = 12000; // Time spent on each page before snapping to the next
 
-        function smoothAutoScroll() {
-            if (!isPlaying || isPausedForReading) return;
+        function scrollToNextPage() {
+            if (!isPlaying) return;
 
-            scrollAccumulator += scrollSpeed;
-            if (scrollAccumulator >= 1) {
-                window.scrollBy(0, Math.floor(scrollAccumulator));
-                scrollAccumulator -= Math.floor(scrollAccumulator);
-            }
-
-            // Find all panels to check visibility
-            const panels = document.querySelectorAll('.panel');
-            let shouldPause = false;
-
-            panels.forEach((panel, index) => {
-                if (!pausedPanels.has(index)) {
-                    const rect = panel.getBoundingClientRect();
-                    // Pause when the bottom of the panel is fully in view
-                    if (rect.bottom > 0 && rect.bottom <= window.innerHeight - 10) {
-                        pausedPanels.add(index);
-                        shouldPause = true;
-                    }
-                }
-            });
-
-            if (shouldPause) {
-                isPausedForReading = true;
-                setTimeout(() => {
-                    isPausedForReading = false;
-                    if (isPlaying) {
-                        autoScrollAnimation = requestAnimationFrame(smoothAutoScroll);
-                    }
-                }, readingPauseDuration);
-                return; 
-            }
-
-            const scrolledToBottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 5;
+            const isMobile = window.innerWidth <= 1024;
+            // Desktop scrolls by row. Mobile stacks panels and scrolls by panel.
+            const snapElements = document.querySelectorAll(isMobile ? '.panel' : '.trifold-row');
             
-            if (scrolledToBottom) {
-                loopCinematicExperience();
-                return; 
+            let nextElement = null;
+
+            for (let i = 0; i < snapElements.length; i++) {
+                const rect = snapElements[i].getBoundingClientRect();
+                // Find the first element whose top is significantly below the current viewport
+                if (rect.top > 50) { 
+                    nextElement = snapElements[i];
+                    break;
+                }
             }
 
-            autoScrollAnimation = requestAnimationFrame(smoothAutoScroll);
+            if (nextElement) {
+                nextElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                // If we've reached the bottom, loop back to the beginning
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         }
 
         function toggleCinematicExperience() {
             if (!isPlaying) {
                 isPlaying = true;
-                bgMusic.play();
+                bgMusic.play().catch(e => console.log("Audio play prevented by browser:", e));
                 musicIcon.classList.replace('fa-play', 'fa-pause');
                 musicToggle.classList.add('playing');
                 document.documentElement.classList.add('playing-mode');
                 
-                // Add any currently visible panels to memory so it doesn't instantly pause
-                document.querySelectorAll('.panel').forEach((panel, index) => {
-                    const rect = panel.getBoundingClientRect();
-                    if (rect.bottom <= window.innerHeight) {
-                        pausedPanels.add(index);
-                    }
-                });
-
-                autoScrollAnimation = requestAnimationFrame(smoothAutoScroll);
+                // Jump to the next page automatically at intervals
+                cinematicInterval = setInterval(scrollToNextPage, pageDuration);
+                
             } else {
                 isPlaying = false;
                 bgMusic.pause();
                 musicIcon.classList.replace('fa-pause', 'fa-play');
                 musicToggle.classList.remove('playing');
                 document.documentElement.classList.remove('playing-mode');
-                cancelAnimationFrame(autoScrollAnimation);
+                
+                clearInterval(cinematicInterval);
             }
-        }
-
-        function loopCinematicExperience() {
-            cancelAnimationFrame(autoScrollAnimation);
-            
-            setTimeout(() => {
-                if (isPlaying) { 
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    
-                    setTimeout(() => {
-                        pausedPanels.clear(); 
-                        
-                        if (isPlaying) {
-                            autoScrollAnimation = requestAnimationFrame(smoothAutoScroll);
-                        }
-                    }, 1500); 
-                }
-            }, 2000); 
         }
     </script>
 </body>
 </html>
-
