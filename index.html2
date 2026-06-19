@@ -1,1 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usman & Khadija | Cinematic Wedding</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --cinematic-gold: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+        }
+
+        /* Hide scrollbar for a true video/cinematic feel when playing */
+        html::-webkit-scrollbar { width: 8px; }
+        html::-webkit-scrollbar-track { background: #050505; }
+        html::-webkit-scrollbar-thumb { background: #bf953f; border-radius: 10px; }
+        html.playing-mode::-webkit-scrollbar { display: none; }
+        html.playing-mode { scrollbar-width: none; }
+
+        body {
+            background: radial-gradient(circle at center, #1a1a24 0%, #050505 100%);
+            font-family: 'Poppins', sans-serif;
+            margin: 0; padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Cinematic Dust Particles */
+        #particles {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(255, 230, 150, 0.4);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 230, 150, 0.8);
+            animation: float-up infinite linear;
+        }
+        @keyframes float-up {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        /* Brochure Container */
+        .brochure-container {
+            width: 100%;
+            min-height: 100vh;
+            background: #fff;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Layout */
+        .trifold-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            flex: 1;
+        }
+        
+        @media (max-width: 1024px) {
+            .trifold-row { grid-template-columns: 1fr; }
+            .border-separator { border-bottom: 4px solid #000; }
+            .panel { min-height: 80vh; height: auto !important; } 
+        }
+
+        /* Typography */
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-script { font-family: 'Great Vibes', cursive; }
+        
+        /* Lively Gold Foil Text Effect */
+        .text-gold {
+            background: var(--cinematic-gold);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 2px 4px rgba(0,0,0,0.3);
+            animation: gold-shimmer 4s linear infinite;
+        }
+        @keyframes gold-shimmer {
+            to { background-position: 200% center; }
+        }
+
+        /* Panels */
+        .panel {
+            padding: 3rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 50vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Deep Royal Cinematic Theme with moving gradient */
+        .bg-theme-cinematic {
+            background: radial-gradient(circle at top right, #0024cc, #000b4d, #001eaa);
+            background-size: 200% 200%;
+            animation: gradient-shift 10s ease infinite;
+            color: white;
+            position: relative;
+        }
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .bg-theme-cinematic::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7z' fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .bg-texture-white {
+            background-color: #fdfdfd;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7z' fill='%23000000' fill-opacity='0.015' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        /* Animated Profile Images - Lively Continuous Float */
+        .profile-img-container {
+            width: 160px; height: 160px;
+            margin: 0 auto 1.5rem auto;
+            border-radius: 50%; overflow: hidden;
+            border: 4px solid #fff;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2), inset 0 0 20px rgba(0,0,0,0.5);
+            animation: lively-float 6s ease-in-out infinite;
+        }
+        @keyframes lively-float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); box-shadow: 0 25px 45px rgba(0,0,0,0.15); }
+            100% { transform: translateY(0px); }
+        }
+        .profile-img-container img {
+            width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease;
+        }
+        .profile-img-container:hover img { transform: scale(1.15); }
+
+        /* Cover Image Pan */
+        .ken-burns-bg {
+            position: absolute; inset: -10%; width: 120%; height: 120%;
+            background-image: url('001.jpg'); background-size: cover; background-position: center 20%;
+            z-index: 0;
+            animation: panZoom 25s infinite alternate linear;
+        }
+        @keyframes panZoom {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.1) translate(-2%, -2%); }
+        }
+
+        /* Glassmorphism Badge Floating */
+        .glass-badge {
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            animation: lively-float 5s ease-in-out infinite reverse;
+        }
+
+        /* Floating Music Button */
+        .music-fab {
+            position: fixed; top: 2rem; right: 2rem; width: 60px; height: 60px;
+            border-radius: 50%; background: var(--cinematic-gold); color: #111;
+            border: none; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            z-index: 100; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .music-fab:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6); }
+        .music-fab.playing { animation: pulse-music 2s infinite; }
+        @keyframes pulse-music {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Particles -->
+    <div id="particles"></div>
+
+    <!-- Audio Element -->
+    <audio id="bgMusic" loop>
+        <source src="abadan.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Floating Play/Pause Button -->
+    <button id="musicToggle" class="music-fab shadow-2xl" onclick="toggleCinematicExperience()" title="Play Cinematic Tour">
+        <i class="fa-solid fa-play" id="musicIcon"></i>
+    </button>
+
+    <div class="brochure-container">
+        
+        <!-- ================= TOP ROW ================= -->
+        <div class="trifold-row border-separator border-b-[6px] border-black relative z-10">
+            
+            <!-- Panel 1: The Groom -->
+            <div class="panel bg-texture-white text-black border-r border-gray-200 text-center">
+                <div class="hashtag text-gray-400" data-aos="fade-down">Meet The Groom</div>
+                
+                <div class="mb-4" data-aos="zoom-in" data-aos-delay="200">
+                    <h2 class="font-serif text-4xl mb-1 uppercase tracking-wider text-gray-900">Usman</h2>
+                    <p class="font-sans font-bold text-[10px] tracking-[0.3em] uppercase text-[#001eaa]">The Groom</p>
+                </div>
+
+                <div class="profile-img-container" data-aos="fade-up" data-aos-delay="400">
+                    <img src="004.jpg" alt="Usman Saleh">
+                </div>
+
+                <div class="font-serif italic text-sm space-y-3 text-gray-700 leading-relaxed px-4 mt-2">
+                    <p class="font-semibold text-base text-gray-900" data-aos="fade-up" data-aos-delay="600">"A man of vision, patience, and unwavering faith."</p>
+                    <p data-aos="fade-up" data-aos-delay="800">Usman is a loving soul whose kindness touches everyone he meets. Guided by Islamic principles, he has always sought a partner who would be his peace in this world and his companion in Jannah.</p>
+                </div>
+            </div>
+
+            <!-- Panel 2: Our Story -->
+            <div class="panel bg-theme-cinematic shadow-[inset_0_0_30px_rgba(0,0,0,0.5)] z-20">
+                <div class="text-center hashtag text-blue-200/50" data-aos="fade-down">Our Love Story</div>
+                
+                <div class="text-center mb-16" data-aos="zoom-in" data-aos-delay="300">
+                    <h2 class="font-script text-6xl mb-0 -mt-2 text-gold drop-shadow-lg">Our Story</h2>
+                    <p class="font-serif font-bold text-xs tracking-[0.25em] uppercase text-blue-100 border-b border-blue-400/30 inline-block pb-2">Written in the Stars</p>
+                </div>
+
+                <div class="font-serif text-sm space-y-4 text-blue-50 text-center leading-relaxed">
+                    <p class="italic text-base text-gold" data-aos="fade-right" data-aos-delay="500">"And We created you in pairs."<br><span class="text-[10px] uppercase tracking-[0.2em] font-sans not-italic font-bold text-blue-200 mt-2 block">- Quran 78:8 -</span></p>
+                    
+                    <p class="opacity-90" data-aos="fade-up" data-aos-delay="700">What started as a respectful introduction quickly blossomed into a profound understanding and a deep, rooted friendship designed by Allah (SWT).</p>
+                    
+                    <p class="opacity-90" data-aos="fade-up" data-aos-delay="900">Through shared values and mutual respect, we realized we had found our home in each other. With our families' blessings, we decided to complete half of our deen.</p>
+
+                    <div class="mt-4 pt-4 border-t border-blue-400/20" data-aos="flip-up" data-aos-delay="1100">
+                        <p class="font-bold text-lg font-script text-gold">"From this day forward, you shall not walk alone."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 3: Cinematic Cover Page -->
+            <div class="panel p-0 bg-black">
+                <div class="ken-burns-bg"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-black/90 via-black/30 to-black/90 z-10"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#000b4d]/50 to-transparent z-10 mix-blend-multiply"></div>
+                
+                <div class="relative z-20 p-10 text-center flex-grow flex flex-col justify-center">
+                    <p class="font-sans text-[10px] tracking-[0.4em] uppercase text-white/80 font-bold mb-3" data-aos="fade-down" data-aos-delay="200">Celebrating</p>
+                    <h1 class="font-serif text-6xl text-gold uppercase tracking-tighter drop-shadow-2xl" style="transform: scaleY(1.2);" data-aos="zoom-in" data-aos-delay="400">Love</h1>
+                    <p class="font-serif text-[10px] tracking-[0.4em] uppercase text-white mt-5 border-t border-white/30 pt-3 inline-block" data-aos="fade-up" data-aos-delay="600">The Wedding</p>
+                </div>
+
+                <div class="relative z-20 p-8 flex justify-center mt-auto" data-aos="fade-up" data-aos-delay="800">
+                    <div class="glass-badge px-6 py-4 rounded-xl shadow-2xl text-center w-full max-w-[260px] border-t border-white/40">
+                        <h2 class="font-serif text-3xl font-black leading-none mb-1 text-white drop-shadow-lg">Usman</h2>
+                        <h2 class="font-script text-4xl text-gold -my-3 drop-shadow-md">&</h2>
+                        <h2 class="font-serif text-3xl font-black leading-none mb-3 text-white drop-shadow-lg">Khadija</h2>
+                        <p class="font-sans text-[9px] font-bold tracking-[0.3em] bg-white text-black py-2 px-4 rounded-full uppercase inline-block shadow-lg mt-2">
+                            11th July 2026
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================= BOTTOM ROW ================= -->
+        <div class="trifold-row relative z-10">
+            
+            <!-- Panel 4: The Bride -->
+            <div class="panel bg-texture-white text-black border-r border-gray-200 text-center">
+                <div class="hashtag text-gray-400" data-aos="fade-down">Meet The Bride</div>
+                
+                <div class="mb-4" data-aos="zoom-in" data-aos-delay="200">
+                    <h2 class="font-serif text-4xl mb-1 uppercase tracking-wider text-gray-900">Khadija</h2>
+                    <p class="font-sans font-bold text-[10px] tracking-[0.3em] uppercase text-[#001eaa]">The Bride</p>
+                </div>
+
+                <div class="profile-img-container bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center relative group" data-aos="fade-up" data-aos-delay="400">
+                    <div class="absolute inset-0 bg-[#001eaa] opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+                    <h1 class="font-script text-7xl text-[#001eaa] group-hover:scale-110 transition-transform duration-500">K</h1>
+                </div>
+
+                <div class="font-serif italic text-sm space-y-3 text-gray-700 leading-relaxed px-4 mt-2">
+                    <p class="font-semibold text-base text-gray-900" data-aos="fade-up" data-aos-delay="600">"A woman of elegance, intellect, and pure heart."</p>
+                    <p data-aos="fade-up" data-aos-delay="800">Khadija's radiant smile and gentle spirit bring light to every room she enters. She embodies grace and modesty, serving as a pillar of strength.</p>
+                    <p data-aos="fade-up" data-aos-delay="1000">As she steps into this beautiful new chapter with Usman, she brings a promise of lifelong devotion and a home filled with joy.</p>
+                </div>
+            </div>
+
+            <!-- Panel 5: Celebration Details -->
+            <div class="panel bg-theme-cinematic shadow-[inset_0_0_30px_rgba(0,0,0,0.5)] z-20">
+                <div class="hashtag text-blue-200/50" data-aos="fade-down">The Celebration</div>
+                
+                <div class="text-center mb-6 border-b border-blue-400/20 pb-4" data-aos="fade-up" data-aos-delay="200">
+                    <h2 class="font-serif text-2xl font-black uppercase tracking-widest text-white drop-shadow-md">When & Where</h2>
+                    <p class="font-sans text-xs tracking-[0.3em] uppercase mt-2 text-gold">11th July 2026</p>
+                </div>
+
+                <div class="space-y-4 font-sans text-center">
+                    <div class="bg-black/30 p-4 rounded-xl border border-blue-400/20 shadow-lg" data-aos="flip-up" data-aos-delay="400">
+                        <h3 class="font-serif text-xl font-bold uppercase tracking-widest mb-2 text-gold">The Nikah</h3>
+                        <p class="font-bold text-[11px] tracking-[0.2em] uppercase mb-1 text-white">10:00 AM Prompt</p>
+                        <p class="text-[13px] italic font-serif text-blue-100">Central Grand Mosque</p>
+                        <p class="text-[10px] mt-1 opacity-60 text-white font-light tracking-wide">123 Islamic Avenue, Beautiful City</p>
+                    </div>
+
+                    <div class="bg-black/30 p-4 rounded-xl border border-blue-400/20 shadow-lg" data-aos="flip-up" data-aos-delay="600">
+                        <h3 class="font-serif text-xl font-bold uppercase tracking-widest mb-2 text-gold">The Walimah</h3>
+                        <p class="font-bold text-[11px] tracking-[0.2em] uppercase mb-1 text-white">2:00 PM Onwards</p>
+                        <p class="text-[13px] italic font-serif text-blue-100">Royal Crystal Banquet Hall</p>
+                        <p class="text-[10px] mt-1 opacity-60 text-white font-light tracking-wide">456 Luxury Drive, Beautiful City</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 6: RSVP & Thank You -->
+            <div class="panel bg-texture-white text-black text-center">
+                <div class="hashtag text-gray-400" data-aos="fade-down">Be Our Guest</div>
+                
+                <div class="font-sans space-y-4 flex flex-col h-full justify-center">
+                    
+                    <div data-aos="zoom-in" data-aos-delay="200">
+                        <h2 class="font-serif text-2xl font-black uppercase tracking-widest mb-2 text-gray-900">Join Our Joy</h2>
+                        <p class="text-sm italic text-gray-600 mb-6 font-serif">We can't wait to celebrate with you!</p>
+                    </div>
+
+                    <div class="border-t border-gray-300 pt-6 mt-4" data-aos="fade-up" data-aos-delay="400">
+                        <p class="font-bold uppercase tracking-widest text-[10px] mb-2 text-[#001eaa]">A Prayer For Us</p>
+                        <p class="font-serif italic text-sm text-gray-800 leading-relaxed px-4">"May Allah bless for you, and may He bless on you, and combine both of you in good."</p>
+                        <p class="text-[9px] uppercase tracking-[0.3em] font-bold mt-3 text-gray-500">- Ameen -</p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-gray-200" data-aos="zoom-in" data-aos-delay="600">
+                        <h1 class="font-serif text-2xl font-black leading-none mt-1 text-gray-900">Usman</h1>
+                        <h1 class="font-script text-2xl text-gold my-1 drop-shadow-sm">&</h1>
+                        <h1 class="font-serif text-2xl font-black leading-none text-gray-900">Khadija</h1>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS with mirrored scrolling so elements animate out and in repeatedly
+        AOS.init({
+            once: false, 
+            mirror: true,
+            offset: 80,
+            duration: 1000,
+            easing: 'ease-out-cubic'
+        });
+
+        // Ambient Particles
+        const particleContainer = document.getElementById('particles');
+        for(let i = 0; i < 40; i++) {
+            let particle = document.createElement('div');
+            particle.className = 'particle';
+            let size = Math.random() * 4 + 1;
+            let left = Math.random() * 100;
+            let duration = Math.random() * 10 + 10;
+            let delay = Math.random() * 10;
+            
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = left + 'vw';
+            particle.style.animationDuration = duration + 's';
+            particle.style.animationDelay = '-' + delay + 's';
+            particleContainer.appendChild(particle);
+        }
+
+        // --- Polished Cinematic Auto-Play Logic --- //
+        const bgMusic = document.getElementById('bgMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicToggle = document.getElementById('musicToggle');
+        
+        let isPlaying = false;
+        let autoScrollAnimation;
+        let scrollAccumulator = 0;
+        
+        // Speed control - 0.5 is a gentle, readable cinematic pan
+        const scrollSpeed = 0.30; 
+
+        function smoothAutoScroll() {
+            if (!isPlaying) return;
+
+            // Accumulate fractional pixels for ultra-smooth rendering
+            scrollAccumulator += scrollSpeed;
+            if (scrollAccumulator >= 1) {
+                window.scrollBy(0, Math.floor(scrollAccumulator));
+                scrollAccumulator -= Math.floor(scrollAccumulator);
+                musicToggle.classList.add('hidden');
+            }
+
+            // Check if we hit the very bottom of the document gracefully
+            const scrolledToBottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 5;
+            
+            if (scrolledToBottom) {
+                loopCinematicExperience();
+                musicToggle.classList.remove('hidden');
+                return; // Stop requesting animation frames temporarily
+            }
+
+            // Continue loop
+            autoScrollAnimation = requestAnimationFrame(smoothAutoScroll);
+        }
+
+        function toggleCinematicExperience() {
+            if (!isPlaying) {
+                // START
+                isPlaying = true;
+                bgMusic.play();
+                musicIcon.classList.replace('fa-play', 'fa-pause');
+                musicToggle.classList.add('playing');
+                document.documentElement.classList.add('playing-mode');
+                
+                autoScrollAnimation = requestAnimationFrame(smoothAutoScroll);
+            } else {
+                // MANUAL PAUSE
+                isPlaying = false;
+                bgMusic.pause();
+                musicIcon.classList.replace('fa-pause', 'fa-play');
+                musicToggle.classList.remove('playing');
+                document.documentElement.classList.remove('playing-mode');
+                cancelAnimationFrame(autoScrollAnimation);
+            }
+        }
+
+        function loopCinematicExperience() {
+            // Cancel current scroll frame, but DO NOT pause music or change playing state
+            cancelAnimationFrame(autoScrollAnimation);
+            
+            // Wait a brief moment to let the user read the bottom section
+            setTimeout(() => {
+                if (isPlaying) { // Only glide if the user hasn't manually paused
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    
+                    // Resume auto-scrolling after returning to the top
+                    setTimeout(() => {
+                        if (isPlaying) {
+                            autoScrollAnimation = requestAnimationFrame(smoothAutoScroll);
+                        }
+                    }, 1500); // Wait 1.5 seconds for the smooth scroll to finish before restarting
+                }
+            }, 2000); // Breathe for 2 seconds at the bottom
+        }
+    </script>
+</body>
+</html>
 
