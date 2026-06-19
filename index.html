@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usman & Khadijah | Cinematic Wedding</title>
+    <title>Usman & Khadija | Cinematic Wedding</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -92,7 +92,7 @@
         /* Mobile specific layout & snapping */
         @media (max-width: 1024px) {
             .trifold-row { 
-                grid-template-columns: 1fr; 
+                grid-template-columns: 1fr !important; 
                 min-height: auto;
             }
             .border-separator { border-bottom: 0; }
@@ -148,7 +148,7 @@
             font-size: 0.85rem;
             letter-spacing: 0.35em;
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 0.5rem; /* Reduced from 2rem to fix spacing */
             font-weight: 500;
             text-transform: uppercase;
         }
@@ -263,7 +263,7 @@
             <div class="panel bg-texture-white text-black border-r border-gray-200 text-center" data-aos="zoom-in-up" data-aos-duration="1200">
                 <div class="hashtag text-gray-400">Meet The Groom</div>
                 
-                <div class="mb-6">
+                <div class="mb-3"> <!-- Reduced from mb-6 -->
                     <h2 class="font-serif text-5xl mb-1 uppercase tracking-wider text-gray-900">Usman</h2>
                     <p class="font-sans font-bold text-xs tracking-[0.3em] uppercase text-[#001eaa]">The Groom</p>
                 </div>
@@ -278,11 +278,11 @@
                 </div>
             </div>
 
-                        <!-- Panel 2: Our Story (Cinematic Royal Blue) -->
+            <!-- Panel 2: Our Story (Cinematic Royal Blue) -->
             <div class="panel bg-theme-cinematic shadow-[inset_0_0_30px_rgba(0,0,0,0.5)] z-20" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
                 <div class="hashtag text-blue-200/50">Our Love Story</div>
                 
-                <div class="text-center mb-10">
+                <div class="text-center mb-5"> <!-- Reduced from mb-10 -->
                     <!-- Added py-4 and leading-tight to prevent the script tails from clipping -->
                     <h2 class="font-script text-7xl mb-0 -mt-2 text-gold drop-shadow-lg py-4 leading-tight">Our Story</h2>
                     <p class="font-serif font-bold text-sm tracking-[0.25em] uppercase text-blue-100 border-b border-blue-400/30 inline-block pb-2">Written in the Stars</p>
@@ -303,14 +303,13 @@
                 </div>
             </div>
 
-
             <div class="panel p-0 bg-black flex flex-col justify-between" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="400">
                 <div class="ken-burns-bg"></div>
                 <div class="absolute inset-0 bg-gradient-to-b from-black/90 via-black/30 to-black/90 z-10"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-[#000b4d]/50 to-transparent z-10 mix-blend-multiply"></div>
                 
-                <div class="relative z-20 p-10 text-center mt-6">
-                    <p class="font-sans text-xs tracking-[0.4em] uppercase text-white/80 font-bold mb-3">Celebrating</p>
+                <div class="relative z-20 p-10 text-center mt-4">
+                    <p class="font-sans text-xs tracking-[0.4em] uppercase text-white/80 font-bold mb-1">Celebrating</p>
                     <h1 class="font-serif text-6xl text-gold uppercase tracking-tighter drop-shadow-2xl" style="transform: scaleY(1.2);">Love</h1>
                     <p class="font-serif text-xs tracking-[0.4em] uppercase text-white mt-5 border-t border-white/30 pt-3 inline-block">The Wedding</p>
                 </div>
@@ -319,7 +318,7 @@
                     <div class="glass-badge px-8 py-6 rounded-xl shadow-2xl text-center w-full max-w-[280px] backdrop-blur-md border-t border-white/40">
                         <h2 class="font-serif text-4xl font-black leading-none mb-1 text-white drop-shadow-lg">Usman</h2>
                         <h2 class="font-script text-5xl text-gold -my-4 drop-shadow-md">&</h2>
-                        <h2 class="font-serif text-4xl font-black leading-none mb-4 text-white drop-shadow-lg">Khadijah</h2>
+                        <h2 class="font-serif text-4xl font-black leading-none mb-4 text-white drop-shadow-lg">Khadija</h2>
                         <p class="font-sans text-[10px] font-bold tracking-[0.3em] bg-white text-black py-2 px-4 rounded-full uppercase inline-block shadow-lg">
                             11th July 2026
                         </p>
@@ -330,13 +329,13 @@
         </div>
 
         <!-- ================= BOTTOM ROW ================= -->
-        <div class="trifold-row relative z-10">
+        <div class="trifold-row border-separator border-b-[8px] border-black relative z-10">
             
             <div class="panel bg-texture-white text-black border-r border-gray-200 text-center" data-aos="zoom-in-up" data-aos-duration="1200">
                 <div class="hashtag text-gray-400">Meet The Bride</div>
                 
-                <div class="mb-6">
-                    <h2 class="font-serif text-5xl mb-1 uppercase tracking-wider text-gray-900">Khadijah</h2>
+                <div class="mb-3"> <!-- Reduced from mb-6 -->
+                    <h2 class="font-serif text-5xl mb-1 uppercase tracking-wider text-gray-900">Khadija</h2>
                     <p class="font-sans font-bold text-xs tracking-[0.3em] uppercase text-[#001eaa]">The Bride</p>
                 </div>
 
@@ -347,7 +346,7 @@
 
                 <div class="flex-grow font-serif italic text-[15px] space-y-5 text-gray-700 leading-relaxed px-4 mt-6">
                     <p class="font-semibold text-lg text-gray-900">"A woman of elegance, intellect, and pure heart."</p>
-                    <p>Khadijah's radiant smile and gentle spirit bring light to every room she enters. She embodies grace and modesty, serving as a pillar of strength.</p>
+                    <p>Khadija's radiant smile and gentle spirit bring light to every room she enters. She embodies grace and modesty, serving as a pillar of strength.</p>
                     <p>As she steps into this beautiful new chapter with Usman, she brings a promise of lifelong devotion and a home filled with joy.</p>
                 </div>
             </div>
@@ -355,7 +354,7 @@
             <div class="panel bg-theme-cinematic shadow-[inset_0_0_30px_rgba(0,0,0,0.5)] z-20" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
                 <div class="hashtag text-blue-200/50">The Celebration</div>
                 
-                <div class="text-center mb-10 border-b border-blue-400/20 pb-8">
+                <div class="text-center mb-6 border-b border-blue-400/20 pb-4"> <!-- Reduced padding/margin -->
                     <h2 class="font-serif text-3xl font-black uppercase tracking-widest text-white drop-shadow-md">When & Where</h2>
                     <p class="font-sans text-sm tracking-[0.3em] uppercase mt-3 text-gold">11th July 2026</p>
                 </div>
@@ -382,8 +381,8 @@
                 
                 <div class="font-sans space-y-6 flex flex-col h-full justify-between">
                     <div>
-                        <h2 class="font-serif text-3xl font-black uppercase tracking-widest mb-3 text-gray-900">Join Our Joy</h2>
-                        <p class="text-[15px] italic text-gray-600 mb-8 font-serif">We can't wait to celebrate with you!</p>
+                        <h2 class="font-serif text-3xl font-black uppercase tracking-widest mb-1 text-gray-900">Join Our Joy</h2>
+                        <p class="text-[15px] italic text-gray-600 mb-6 font-serif">We can't wait to celebrate with you!</p>
                     </div>
 
                     <div class="border-t border-gray-300 pt-8 mt-4">
@@ -395,12 +394,40 @@
                     <div class="mt-8 pt-6 border-t border-gray-200">
                         <h1 class="font-serif text-3xl font-black leading-none mt-2 text-gray-900">Usman</h1>
                         <h1 class="font-script text-3xl text-gold my-2 drop-shadow-sm">&</h1>
-                        <h1 class="font-serif text-3xl font-black leading-none text-gray-900">Khadijah</h1>
+                        <h1 class="font-serif text-3xl font-black leading-none text-gray-900">Khadija</h1>
                     </div>
                 </div>
             </div>
 
         </div>
+
+        <!-- ================= FULL WIDTH LOVE PANEL ================= -->
+        <div class="trifold-row relative z-10" style="grid-template-columns: 1fr;">
+            <div class="panel bg-[#050505] text-center flex flex-col items-center justify-center relative overflow-hidden" data-aos="zoom-in-up" data-aos-duration="1500">
+                <!-- Cinematic Background Effect for the Love Panel -->
+                <div class="absolute inset-0 bg-gradient-to-r from-[#000b4d]/20 via-black to-[#000b4d]/20 z-0"></div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-10 z-0">
+                    <i class="fa-solid fa-heart text-[25rem] text-white"></i>
+                </div>
+                
+                <div class="relative z-20 max-w-3xl mx-auto px-6">
+                    <div class="hashtag text-gold">The Meaning of Forever</div>
+                    
+                    <h2 class="font-script text-8xl md:text-9xl text-white drop-shadow-2xl py-4 leading-tight mb-4">Love</h2>
+                    
+                    <div class="w-16 h-[1px] bg-gold mx-auto mb-8"></div>
+                    
+                    <p class="font-serif italic text-xl md:text-2xl text-gray-300 leading-relaxed drop-shadow-md">
+                        "Love is not just looking at each other, it's looking in the same direction. It is the tranquility of the soul and the peace of the heart."
+                    </p>
+                    
+                    <div class="mt-12">
+                        <i class="fa-solid fa-heart text-gold text-3xl animate-pulse drop-shadow-lg"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Scripts for Animations & Cinematic Scroll -->
@@ -495,3 +522,4 @@
     </script>
 </body>
 </html>
+
